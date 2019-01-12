@@ -86,12 +86,13 @@
                                    value="msg://welcomeLabel"/>
                             <label id="mainLabelCustomer"
                                    align="MIDDLE_CENTER"
-                                   stylename="h1"
+                                   stylename="h2"
                                    value="msg://mainText"
                                    width="100%"/>
                             <label id="mainLabelManufacturer"
                                    align="MIDDLE_CENTER"
-                                   value="msg://mainLabelManufacturer"/>
+                                   value="msg://mainLabelManufacturer"
+                                   width="90%"/>
                             <label id="endLabelCustomer"
                                    align="MIDDLE_CENTER"
                                    stylename="h1 bold"

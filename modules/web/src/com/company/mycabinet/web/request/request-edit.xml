@@ -179,6 +179,10 @@
                                                 action="attachmentsTable.edit"/>
                                         <button id="removeAttachmentButton"
                                                 action="attachmentsTable.remove"/>
+                                        <button id="openAttachButton"
+                                                caption="msg://openButton"
+                                                icon="icons/download.png"
+                                                invoke="onOpenAttachButtonClick"/>
                                     </buttonsPanel>
                                 </table>
                             </groupBox>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.company.mycabinet.web.attachment.Imageframe"
+        messagesPack="com.company.mycabinet.web.attachment">
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <image id="image"
+               height="100%"
+               width="100%"/>
+    </layout>
+</window>

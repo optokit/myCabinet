@@ -1,5 +1,6 @@
 package com.company.mycabinet.web.request;
 
+import com.company.mycabinet.entity.Attachment;
 import com.company.mycabinet.entity.ExtUser;
 import com.company.mycabinet.entity.Status;
 import com.company.mycabinet.service.UserUtilsService;
@@ -12,10 +13,14 @@ import com.company.mycabinet.entity.Request;
 import com.haulmont.cuba.gui.components.actions.CreateAction;
 import com.haulmont.cuba.gui.components.actions.EditAction;
 import com.haulmont.cuba.gui.components.actions.RemoveAction;
+import com.haulmont.cuba.gui.export.ByteArrayDataProvider;
+import com.haulmont.cuba.gui.export.ExportDisplay;
+import com.haulmont.cuba.gui.export.ExportFormat;
 import org.apache.commons.lang.StringUtils;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +51,9 @@ public class RequestEdit extends AbstractEditor<Request> {
     protected FieldGroup fieldGroupRight;
 
     @Inject
+    protected Table<Attachment> attachmentsTable;
+
+    @Inject
     protected GroupBoxLayout responsesGroupBox,
             closeRequestReasonGroupBox;
 
@@ -61,6 +69,9 @@ public class RequestEdit extends AbstractEditor<Request> {
 
     @Inject
     protected TimeSource timeSource;
+
+    @Inject
+    private ExportDisplay exportDisplay;
 
     protected boolean itemCreated = false;
 
@@ -86,7 +97,7 @@ public class RequestEdit extends AbstractEditor<Request> {
 
         attachmentCreateAction.setWindowParams(ParamsMap.of("status", getItem().getStatus()));
 
-        if(userUtilsService.isCurrentUserAdmin()) {
+        if (userUtilsService.isCurrentUserAdmin()) {
             closeRequestByAdmin.setVisible(true);
             closeRequestReasonGroupBox.setVisible(true);
         }
@@ -180,6 +191,24 @@ public class RequestEdit extends AbstractEditor<Request> {
             commitAndClose();
         } else {
             showNotification("Сначала заполните причину закрытия заявки");
+        }
+    }
+
+    public void onOpenAttachButtonClick() {
+        if (attachmentsTable.getSingleSelected() != null) {
+            Attachment attachment = attachmentsTable.getSingleSelected();
+            if (attachment.getAttachment().getExtension().equals("jpg")
+                    || attachment.getAttachment().getExtension().equals("jpeg")
+                    || attachment.getAttachment().getExtension().equals("png")) {
+                //openFrame(this, "imageFrame", ParamsMap.of("imageDs", ));
+              //  exportDisplay.show(attachment.getAttachment(), ExportFormat.HTML);
+                showNotification("skoro budet");
+            } else {
+               // exportDisplay.show(attachment.getAttachment(), ExportFormat.HTML);
+                showNotification("skoro budet");
+            }
+        } else {
+            showNotification(getMessage("notSelectedAttachment"));
         }
     }
 }
