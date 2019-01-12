@@ -1,12 +1,15 @@
 package com.company.mycabinet.web.response;
 
+import com.company.mycabinet.entity.Attachment;
 import com.company.mycabinet.entity.ExtUser;
 import com.company.mycabinet.entity.Status;
 import com.company.mycabinet.service.UserUtilsService;
 import com.company.mycabinet.service.WorkflowEmailerService;
 import com.google.common.base.Strings;
+import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.gui.AppConfig;
 import com.haulmont.cuba.gui.WindowManager;
 import com.haulmont.cuba.gui.components.*;
 import com.company.mycabinet.entity.Response;
@@ -35,6 +38,9 @@ public class ResponseEdit extends AbstractEditor<Response> {
 
     @Inject
     protected GroupBoxLayout feedbackGroupBox;
+
+    @Inject
+    protected Table<Attachment> attachmentTable;
 
     @Named("feedbackFieldGroup.contact")
     protected Field contactField;
@@ -230,6 +236,21 @@ public class ResponseEdit extends AbstractEditor<Response> {
             getItem().setState(Status.RESPONSE_SPECIFY_GOT);
             workflowEmailerService.sendMessageAboutSpecifyGotToManufacturer(getItem().getRequest(), getItem());
             commitAndClose();
+        }
+    }
+
+    public void onDownloadButtonClick() {
+        if (attachmentTable.getSingleSelected() != null) {
+            Attachment attachment = attachmentTable.getSingleSelected();
+            if (attachment.getAttachment().getExtension().equals("jpg")
+                    || attachment.getAttachment().getExtension().equals("jpeg")
+                    || attachment.getAttachment().getExtension().equals("png")) {
+                openWindow("imageFrame", WindowManager.OpenType.DIALOG, ParamsMap.of("image", attachment.getAttachment()));
+            } else {
+                AppConfig.createExportDisplay(this).show(attachment.getAttachment());
+            }
+        } else {
+            showNotification(getMessage("notSelectedAttachment"));
         }
     }
 }

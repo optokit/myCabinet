@@ -151,15 +151,16 @@
                                height="100%"
                                width="100%">
                             <actions>
-                                <action id="create"/>
-                                <action id="edit"/>
+                                <action id="create"
+                                        openType="DIALOG"/>
+                                <action id="edit"
+                                        openType="DIALOG"/>
                                 <action id="remove"/>
                             </actions>
                             <columns>
-                                <column id="name"/>
-                                <column id="extension"/>
-                                <column id="size"/>
-                                <column id="createDate"/>
+                                <column id="attachment.name"/>
+                                <column id="attachment.extension"/>
+                                <column id="attachment.size"/>
                             </columns>
                             <rows datasource="attachmentDs"/>
                             <buttonsPanel>
@@ -169,6 +170,10 @@
                                         action="attachmentTable.edit"/>
                                 <button id="removeButton"
                                         action="attachmentTable.remove"/>
+                                <button id="downloadButton"
+                                        caption="msg://open"
+                                        icon="icons/download.png"
+                                        invoke="onDownloadButtonClick"/>
                             </buttonsPanel>
                         </table>
                     </groupBox>

@@ -56,11 +56,11 @@ public class Response extends StandardEntity {
     @JoinColumn(name = "REQUEST_ID")
     protected Request request;
 
-    @JoinTable(name = "MYCABINET_RESPONSE_FILE_DESCRIPTOR_LINK",
+    @JoinTable(name = "MYCABINET_RESPONSE_ATTACHMENT_LINK",
         joinColumns = @JoinColumn(name = "RESPONSE_ID"),
-        inverseJoinColumns = @JoinColumn(name = "FILE_DESCRIPTOR_ID"))
+        inverseJoinColumns = @JoinColumn(name = "ATTACHMENT_ID"))
     @ManyToMany
-    protected List<FileDescriptor> attachment;
+    protected List<Attachment> attachment;
 
     @Column(name = "STATE")
     protected String state;
@@ -68,6 +68,15 @@ public class Response extends StandardEntity {
     @Lob
     @Column(name = "MANUFACTURER_INFO")
     protected String manufacturerInfo;
+
+    public List<Attachment> getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(List<Attachment> attachment) {
+        this.attachment = attachment;
+    }
+
 
     public void setManufacturerInfo(String manufacturerInfo) {
         this.manufacturerInfo = manufacturerInfo;
@@ -96,14 +105,6 @@ public class Response extends StandardEntity {
     }
 
 
-
-    public void setAttachment(List<FileDescriptor> attachment) {
-        this.attachment = attachment;
-    }
-
-    public List<FileDescriptor> getAttachment() {
-        return attachment;
-    }
 
 
     public void setRequest(Request request) {

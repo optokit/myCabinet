@@ -40,7 +40,6 @@
         </property>
         <property name="attachment"
                   view="_minimal">
-            <property name="size"/>
         </property>
         <property name="creator"
                   view="_local"/>

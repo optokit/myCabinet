@@ -1,0 +1,5 @@
+create table MYCABINET_RESPONSE_ATTACHMENT_LINK (
+    RESPONSE_ID uuid,
+    ATTACHMENT_ID uuid,
+    primary key (RESPONSE_ID, ATTACHMENT_ID)
+);

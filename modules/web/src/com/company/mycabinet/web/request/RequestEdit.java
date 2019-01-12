@@ -7,6 +7,7 @@ import com.company.mycabinet.service.UserUtilsService;
 import com.company.mycabinet.service.WorkflowEmailerService;
 import com.haulmont.bali.util.ParamsMap;
 import com.haulmont.cuba.core.global.*;
+import com.haulmont.cuba.gui.AppConfig;
 import com.haulmont.cuba.gui.WindowManager;
 import com.haulmont.cuba.gui.components.*;
 import com.company.mycabinet.entity.Request;
@@ -200,12 +201,9 @@ public class RequestEdit extends AbstractEditor<Request> {
             if (attachment.getAttachment().getExtension().equals("jpg")
                     || attachment.getAttachment().getExtension().equals("jpeg")
                     || attachment.getAttachment().getExtension().equals("png")) {
-                //openFrame(this, "imageFrame", ParamsMap.of("imageDs", ));
-              //  exportDisplay.show(attachment.getAttachment(), ExportFormat.HTML);
-                showNotification("skoro budet");
+                openWindow("imageFrame", WindowManager.OpenType.DIALOG, ParamsMap.of("image", attachment.getAttachment()));
             } else {
-               // exportDisplay.show(attachment.getAttachment(), ExportFormat.HTML);
-                showNotification("skoro budet");
+                AppConfig.createExportDisplay(this).show(attachment.getAttachment());
             }
         } else {
             showNotification(getMessage("notSelectedAttachment"));
