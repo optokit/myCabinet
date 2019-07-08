@@ -1,0 +1,1 @@
+alter table mycabinet_response_attachment_link rename to MYCABINET_RESPONSE_ATTACHMENT_LINK__U92875 ;
